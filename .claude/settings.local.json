@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/bin/pytest tests/test_cli.py::test_create_skill tests/test_validation.py::test_validate_skill_requires_registry_entry -v -s)"
+    ]
+  }
+}

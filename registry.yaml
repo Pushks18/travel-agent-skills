@@ -1,0 +1,58 @@
+skills:
+  ancillery-skill:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/ancillery-skill
+    status: draft
+    tags:
+    - travel
+    - ancillery
+    - skill
+    version: 0.1.0
+  booking-skill:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/booking-skill
+    status: draft
+    tags:
+    - travel
+    - booking
+    - skill
+    version: 0.1.0
+  flight-search:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/flight-search
+    status: draft
+    tags:
+    - travel
+    - flight
+    - search
+    - airfare
+    version: 0.1.0
+  planning-skill:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/planning-skill
+    status: draft
+    tags:
+    - travel
+    - planning
+    - skill
+    version: 0.1.0

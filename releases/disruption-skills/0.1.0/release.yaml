@@ -1,0 +1,16 @@
+artifact: disruption-skills.zip
+created_at: '2026-05-13T17:21:03.779517+00:00'
+distribution:
+- org-provisioned
+- zip
+- project-local
+name: disruption-skills
+owners:
+- travel-platform
+sha256: 06062aabbb47854825ef78ab56d7a65c570eb8ce0f7e9d54f0bd68d4989fe78f
+status: draft
+tags:
+- travel
+- disruption
+- skills
+version: 0.1.0

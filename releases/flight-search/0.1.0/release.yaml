@@ -1,0 +1,17 @@
+artifact: flight-search.zip
+created_at: '2026-05-03T17:10:42.755705+00:00'
+distribution:
+- org-provisioned
+- zip
+- project-local
+name: flight-search
+owners:
+- travel-platform
+sha256: 7b5ad8999aac37db3f05cf4a7cb9bee1d93f06f8363e62ff1f6ebe5d3d3e0d5b
+status: draft
+tags:
+- travel
+- flight
+- search
+- airfare
+version: 0.1.0
