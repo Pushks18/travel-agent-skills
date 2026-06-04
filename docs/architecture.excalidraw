@@ -1,0 +1,632 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "id": "r_tas_outer", "type": "rectangle", "x": 20, "y": 20, "width": 2720, "height": 550,
+      "angle": 0, "strokeColor": "#3b82f6", "backgroundColor": "#dbeafe", "fillStyle": "solid",
+      "strokeWidth": 3, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 1, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_tas_header", "type": "text", "x": 40, "y": 30, "width": 600, "height": 35,
+      "angle": 0, "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 2, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "✈  travel-agent-skills  (github.com/Tabhi-Commons/travel-agent-skills)", "fontSize": 20,
+      "fontFamily": 2, "textAlign": "left", "verticalAlign": "top", "baseline": 18,
+      "containerId": null, "originalText": "✈  travel-agent-skills", "lineHeight": 1.25
+    },
+    {
+      "id": "r_skills_box", "type": "rectangle", "x": 50, "y": 80, "width": 450, "height": 460,
+      "angle": 0, "strokeColor": "#60a5fa", "backgroundColor": "#eff6ff", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 3, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_skills_label", "type": "text", "x": 70, "y": 95, "width": 200, "height": 25,
+      "angle": 0, "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 4, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "skills/  +  registry.yaml", "fontSize": 15, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "skills/", "lineHeight": 1.25
+    },
+    {
+      "id": "t_skills_list", "type": "text", "x": 70, "y": 130, "width": 400, "height": 380,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 5, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "flight-search/SKILL.md\nhotel-search/SKILL.md\nbooking-skill/SKILL.md\nfare-rules/SKILL.md\nmodify-booking/SKILL.md\nancillery-skill/SKILL.md\nplanning-skill/SKILL.md\n\nregistry.yaml\n  version, owners, status\n  tags, distribution\n\nreleases/\n  ZIP artifacts\n  org-provisioned\n  manual upload", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_cli_box", "type": "rectangle", "x": 520, "y": 80, "width": 540, "height": 460,
+      "angle": 0, "strokeColor": "#60a5fa", "backgroundColor": "#eff6ff", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 6, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_cli_label", "type": "text", "x": 540, "y": 95, "width": 300, "height": 25,
+      "angle": 0, "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 7, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "CLI  (pip install -e .)", "fontSize": 15, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "CLI", "lineHeight": 1.25
+    },
+    {
+      "id": "t_cli_commands", "type": "text", "x": 540, "y": 130, "width": 490, "height": 380,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 8, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "skills create <name> --owner <team>\n\nskills generate <name>\n  --description \"...\"\n  --owner travel-platform\n  └─ Gemini 2.5 Flash → SKILL.md body\n  └─ registers in registry.yaml (draft)\n\nskills validate --all\n\nskills package <name>\n  → releases/<name>/<v>/skill.zip\n\nskills list / info / delete", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_ci_box", "type": "rectangle", "x": 1080, "y": 80, "width": 1620, "height": 460,
+      "angle": 0, "strokeColor": "#60a5fa", "backgroundColor": "#eff6ff", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 9, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_ci_label", "type": "text", "x": 1100, "y": 95, "width": 500, "height": 25,
+      "angle": 0, "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 10, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "GitHub Actions  (.github/workflows/eval.yml)  — trigger: PR to skills/**", "fontSize": 15, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.25
+    },
+    {
+      "id": "r_validate_job", "type": "rectangle", "x": 1110, "y": 140, "width": 440, "height": 360,
+      "angle": 0, "strokeColor": "#93c5fd", "backgroundColor": "#e0f2fe", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 11, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_validate_job", "type": "text", "x": 1130, "y": 155, "width": 400, "height": 330,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 12, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Job 1: validate\n\nskills validate --all\n\nFAIL → block PR ✗\nPASS → trigger Job 2", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_eval_job", "type": "rectangle", "x": 1590, "y": 140, "width": 1070, "height": 360,
+      "angle": 0, "strokeColor": "#93c5fd", "backgroundColor": "#e0f2fe", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 13, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_eval_job", "type": "text", "x": 1610, "y": 155, "width": 1030, "height": 330,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 14, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Job 2: eval  (needs: validate)\n\n1. checkout skill-testing-playground @ main  (read-only)\n2. detect changed skill  (git diff HEAD^1)\n3. pip install -e .\n4. start mock MCP server &\n5. python -m eval.ab_compare \\\n     --skill-path <changed-skill> --trials 5\n6. post PR comment  (verdict + Langfuse trace links)\n\nSecrets: EVAL_PLATFORM_TOKEN  OPENROUTER_API_KEY\n         LANGFUSE_PUBLIC_KEY  LANGFUSE_SECRET_KEY  LANGFUSE_HOST", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_playground_outer", "type": "rectangle", "x": 20, "y": 650, "width": 2720, "height": 1090,
+      "angle": 0, "strokeColor": "#22c55e", "backgroundColor": "#dcfce7", "fillStyle": "solid",
+      "strokeWidth": 3, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 15, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_playground_header", "type": "text", "x": 40, "y": 660, "width": 700, "height": 30,
+      "angle": 0, "strokeColor": "#15803d", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 16, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "🧪  skill-testing-playground  (github.com/Tabhi-Commons/skill-testing-playground)", "fontSize": 20,
+      "fontFamily": 2, "textAlign": "left", "verticalAlign": "top", "baseline": 18, "containerId": null, "originalText": "", "lineHeight": 1.25
+    },
+    {
+      "id": "r_skill_loader", "type": "rectangle", "x": 50, "y": 710, "width": 450, "height": 140,
+      "angle": 0, "strokeColor": "#4ade80", "backgroundColor": "#ffffff", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 17, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_skill_loader", "type": "text", "x": 65, "y": 718, "width": 420, "height": 124,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 18, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Skill Loader  (eval/skill_loader.py)\n\nload_skill(path) → LoadedSkill\nStrips YAML frontmatter\n→ injects .body into system prompt\nFallback: plain markdown (legacy)", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_ab_harness", "type": "rectangle", "x": 50, "y": 880, "width": 450, "height": 310,
+      "angle": 0, "strokeColor": "#4ade80", "backgroundColor": "#ffffff", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 19, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_ab_harness", "type": "text", "x": 65, "y": 890, "width": 420, "height": 290,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 20, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "A/B Harness  (eval/ab_compare.py)\n\n--skill-path <any repo dir>\n--trials N\n\nTask loading:\n1. Exact match: task.toml skill=\"name\"\n2. Semantic fallback: SkillRouter\n   (cosine sim, threshold 0.35)\n\nPer task × N trials:\n  condition A: no_skill baseline\n  condition B: with_skill injected\n  best-of-N score per condition", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_travel_agent", "type": "rectangle", "x": 540, "y": 710, "width": 390, "height": 370,
+      "angle": 0, "strokeColor": "#4ade80", "backgroundColor": "#ffffff", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 21, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_travel_agent", "type": "text", "x": 555, "y": 720, "width": 360, "height": 350,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 22, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Travel Agent  (agent/travel_agent.py)\nLangGraph + LangChain\n\nsystem_prompt = skill.body\n  (or empty for no_skill)\n\nTools (9):\n  search_flights\n  search_hotels\n  create_booking\n  modify_booking\n  cancel_booking\n  get_fare_rules\n  check_availability\n  validate_passenger\n  get_itinerary\n\nModel: Gemini 2.5 Flash", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_mock_mcp", "type": "rectangle", "x": 550, "y": 1110, "width": 370, "height": 100,
+      "angle": 0, "strokeColor": "#ca8a04", "backgroundColor": "#fef9c3", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "dashed", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 23, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_mock_mcp", "type": "text", "x": 565, "y": 1120, "width": 340, "height": 80,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 24, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Mock MCP Server  :8000\n9 travel endpoints  |  Deterministic (seeded by params)", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_verifiers", "type": "rectangle", "x": 980, "y": 710, "width": 390, "height": 380,
+      "angle": 0, "strokeColor": "#4ade80", "backgroundColor": "#ffffff", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 25, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_verifiers", "type": "text", "x": 995, "y": 720, "width": 360, "height": 360,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 26, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Verifiers  (eval/verifiers/)\n\nToolCallVerifier\n  checks tool name + param keys\n  deterministic, zero API cost\n  score: 0.0–1.0\n  task.toml: verifier=\"tool_call_check\"\n\nLLMJudgeVerifier\n  Gemini 2.5 Flash via OpenRouter\n  criteria-aware (task.toml criteria=)\n  3 runs → averaged score\n  task.toml: verifier=\"llm_judge\"\n  use for quality/format tasks", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_semantic_router", "type": "rectangle", "x": 1420, "y": 710, "width": 420, "height": 230,
+      "angle": 0, "strokeColor": "#4ade80", "backgroundColor": "#ffffff", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 27, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_semantic_router", "type": "text", "x": 1435, "y": 720, "width": 390, "height": 210,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 28, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Semantic Router  (eval/skill_router.py)\n\nModel: all-MiniLM-L6-v2  (80MB, local)\nEmbed skill descriptions once\nCosine sim on task instruction\nThreshold: 0.35  |  < 1ms / query\n\nUsed for: task-bank fallback matching\n           agent orchestration (Phase 8)", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_gate_check", "type": "rectangle", "x": 980, "y": 1120, "width": 400, "height": 240,
+      "angle": 0, "strokeColor": "#4ade80", "backgroundColor": "#ffffff", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 29, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_gate_check", "type": "text", "x": 995, "y": 1130, "width": 370, "height": 220,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 30, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Gate Check  (eval/gate_check.py)\n\nweighted_delta = Σ(delta × weight) / Σw\nDomain weights: booking=3.0 flight/hotel=2.0\n\nT1 BLOCK    delta < -0.05  exit(1)\nT2 SOFT     delta < 0       exit(1)\nT3 WARN     small negative  exit(0)\nPASS        delta ≥ +0.05  exit(0)", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_cost_metrics", "type": "rectangle", "x": 1420, "y": 980, "width": 420, "height": 230,
+      "angle": 0, "strokeColor": "#4ade80", "backgroundColor": "#ffffff", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 31, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_cost_metrics", "type": "text", "x": 1435, "y": 990, "width": 390, "height": 210,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 32, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Cost + Latency  (eval/cost.py)\n\nPer run: input_tokens, output_tokens\n         cost_usd, latency_ms\nPer eval: total_cost, avg_cost/run\n          avg_latency, p95_latency\nDelta: cost_delta, latency_delta\n\ngemini-2.5-flash: $0.15/$0.60 per 1M", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_langfuse", "type": "rectangle", "x": 1900, "y": 710, "width": 800, "height": 300,
+      "angle": 0, "strokeColor": "#f43f5e", "backgroundColor": "#fff1f2", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 33, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_langfuse", "type": "text", "x": 1915, "y": 720, "width": 770, "height": 280,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 34, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Langfuse  (cloud.langfuse.com or self-hosted)\n\nFull LLM call tree per run\nTool call spans with latency\nverifier_score event pushed after run\nsession_id = task_id__run_id\n  → groups no_skill + with_skill runs\n\nTrace URL stored in EvalResult\n→ surfaced in PR comment for regressions\n\nKeys: LANGFUSE_PUBLIC_KEY / SECRET_KEY / HOST", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_sqlite", "type": "rectangle", "x": 1900, "y": 1040, "width": 800, "height": 280,
+      "angle": 0, "strokeColor": "#f43f5e", "backgroundColor": "#fff1f2", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 35, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_sqlite", "type": "text", "x": 1915, "y": 1050, "width": 770, "height": 260,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 36, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "SQLite Trajectory Store  (trajectory.db)\nLightweight local supplement to Langfuse\n\nruns table: task_id, condition, score, failure_mode\nsteps table: tool_name, latency_ms, tokens\n\n7 failure modes:\n  NO_TOOL_CALL  WRONG_TOOL  MISSING_PARAM\n  MULTI_STEP_DROPOUT  PARTIAL_MATCH\n  HALLUCINATED_ID  UNKNOWN\n\n→ feeds GRPO propose_skill clustering", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_grpo", "type": "rectangle", "x": 50, "y": 1240, "width": 850, "height": 450,
+      "angle": 0, "strokeColor": "#f59e0b", "backgroundColor": "#fef9c3", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 37, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_grpo", "type": "text", "x": 65, "y": 1252, "width": 820, "height": 430,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 38, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "GRPO Optimizer  (eval/optimizer/)\n\noptimizer.py — improve existing skill\n  K=5 variants × up to 5 rounds\n  generate_variant() via Gemini 2.5 Flash\n  fast-eval scores each variant\n  propose-only — NEVER auto-commits\n\npropose_skill.py — Phase 6.2\n  1. load_failure_clusters(trajectory.db)\n     OR load_clusters_from_ab_results()\n  2. skip domains with existing skill\n  3. cluster by domain + failure_mode (min 5)\n  4. draft_skill_body() via Gemini 2.5 Flash\n  5. open_skill_pr() via GitHub API\n     branch: proposal/<skill-name>\n     PR: \"proposal: auto-generated <skill>\"\n  6. CI eval gate runs on the PR\n  7. Human approves or closes — NEVER auto-merged", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_outputs_outer", "type": "rectangle", "x": 20, "y": 1820, "width": 2720, "height": 220,
+      "angle": 0, "strokeColor": "#a855f7", "backgroundColor": "#faf5ff", "fillStyle": "solid",
+      "strokeWidth": 3, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 39, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_outputs_header", "type": "text", "x": 40, "y": 1830, "width": 300, "height": 25,
+      "angle": 0, "strokeColor": "#7e22ce", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 40, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Outputs", "fontSize": 18, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 16, "containerId": null, "originalText": "Outputs", "lineHeight": 1.25
+    },
+    {
+      "id": "r_pr_comment", "type": "rectangle", "x": 50, "y": 1860, "width": 680, "height": 150,
+      "angle": 0, "strokeColor": "#c084fc", "backgroundColor": "#f3e8ff", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 41, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_pr_comment", "type": "text", "x": 65, "y": 1870, "width": 650, "height": 130,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 42, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "PR Comment\n✅/⚠️/🔶/🚫  verdict badge\nweighted_delta  |  regression_rate\nCost Δ vs no_skill baseline\nLangfuse trace links per regressed task", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_leaderboard", "type": "rectangle", "x": 780, "y": 1860, "width": 680, "height": 150,
+      "angle": 0, "strokeColor": "#c084fc", "backgroundColor": "#f3e8ff", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 43, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_leaderboard", "type": "text", "x": 795, "y": 1870, "width": 650, "height": 130,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 44, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Leaderboard  (ab_results.json)\nskill → weighted_delta\nSorted by improvement\nCost + latency columns\nRegression rate per skill", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_zip_releases", "type": "rectangle", "x": 1510, "y": 1860, "width": 680, "height": 150,
+      "angle": 0, "strokeColor": "#c084fc", "backgroundColor": "#f3e8ff", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 45, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_zip_releases", "type": "text", "x": 1525, "y": 1870, "width": 650, "height": 130,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 46, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "ZIP Releases  (releases/)\nreleases/<name>/<ver>/<name>.zip\nrelease.yaml: version, checksum, date\nDistribution: org-provisioned\n  manual upload  |  project-local", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_dynamic_outer", "type": "rectangle", "x": 2800, "y": 20, "width": 1060, "height": 1790,
+      "angle": 0, "strokeColor": "#f97316", "backgroundColor": "#fff7ed", "fillStyle": "solid",
+      "strokeWidth": 3, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 47, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_dynamic_header", "type": "text", "x": 2820, "y": 32, "width": 700, "height": 30,
+      "angle": 0, "strokeColor": "#c2410c", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 48, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "⚡  Dynamic Skill Creation  (Phase 6)", "fontSize": 19, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 17, "containerId": null, "originalText": "", "lineHeight": 1.25
+    },
+    {
+      "id": "r_path_a", "type": "rectangle", "x": 2830, "y": 80, "width": 1000, "height": 820,
+      "angle": 0, "strokeColor": "#fb923c", "backgroundColor": "#ffedd5", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 49, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_path_a", "type": "text", "x": 2848, "y": 92, "width": 964, "height": 796,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 50, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "PATH A — skills generate\n(human-initiated, LLM-drafted)\n\n$ skills generate disruption-handling \\\n    --description \"Handle cancelled flights\n    and rebooking\" \\\n    --owner travel-platform\n\nFlow:\n1. validate name (VALID_SKILL_NAME regex)\n2. call Gemini 2.5 Flash via OpenRouter\n   GENERATE_PROMPT:\n     name + description →\n     structured SKILL.md body\n     (Workflow, Inputs, Output,\n      Edge Cases)\n3. build YAML frontmatter\n4. write skills/<name>/SKILL.md\n5. upsert registry.yaml (status: draft)\n\nOutput:\n\"Generated skill: skills/disruption-handling\nReview SKILL.md before opening a PR\"\n\nHuman reviews + edits\n→ opens PR\n→ CI eval gate runs\n→ PASS / BLOCK", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_path_b", "type": "rectangle", "x": 2830, "y": 940, "width": 1000, "height": 830,
+      "angle": 0, "strokeColor": "#fb923c", "backgroundColor": "#ffedd5", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 51, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_path_b", "type": "text", "x": 2848, "y": 952, "width": 964, "height": 806,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 52, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "PATH B — GRPO auto-proposal\n(system-initiated, from failures)\n\n$ python -m eval.optimizer.propose_skill \\\n    --threshold 5 \\\n    --github-token ghp_... \\\n    --repo Tabhi-Commons/travel-agent-skills\n\nFlow:\n1. load_failure_clusters(trajectory.db)\n   OR load_clusters_from_ab_results()\n2. skip domains with existing skill\n3. group by domain + failure_mode\n   require >= threshold (default 5)\n4. draft_skill_body() \n   Gemini 2.5 Flash:\n   failure context → SKILL.md body\n5. open_skill_pr() via GitHub API\n   branch: proposal/<skill-name>\n   commit: skills/<name>/SKILL.md\n   PR title: \"proposal: auto-generated <name>\"\n6. CI eval gate runs automatically on PR\n7. Human reviews content\n   approves or closes\n   NEVER auto-merged\n\n--dry-run flag: print proposals, no PR", "fontSize": 13, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "r_openrouter", "type": "rectangle", "x": 2800, "y": 1820, "width": 1060, "height": 200,
+      "angle": 0, "strokeColor": "#d97706", "backgroundColor": "#fef3c7", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 3}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 53, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false
+    },
+    {
+      "id": "t_openrouter", "type": "text", "x": 2820, "y": 1832, "width": 1020, "height": 176,
+      "angle": 0, "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 54, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "🔑  OpenRouter  (openrouter.ai/api/v1)\nModel: google/gemini-2.5-flash  (ALL LLM calls)\nKey: OPENROUTER_API_KEY\n\nUsed by: Travel Agent · LLM Judge · GRPO Optimizer · propose_skill · skills generate\nPricing: $0.15 / 1M input tokens  |  $0.60 / 1M output tokens", "fontSize": 14, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 13, "containerId": null, "originalText": "", "lineHeight": 1.4
+    },
+    {
+      "id": "a_ci_to_playground", "type": "arrow", "x": 1320, "y": 570, "width": 0, "height": 80,
+      "angle": 0, "strokeColor": "#3b82f6", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "dashed", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 55, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [0, 80]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "t_ci_checkout_label", "type": "text", "x": 1330, "y": 590, "width": 300, "height": 20,
+      "angle": 0, "strokeColor": "#3b82f6", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 56, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "checkout (read-only)", "fontSize": 12, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 11, "containerId": null, "originalText": "", "lineHeight": 1.25
+    },
+    {
+      "id": "a_loader_to_harness", "type": "arrow", "x": 275, "y": 850, "width": 0, "height": 30,
+      "angle": 0, "strokeColor": "#22c55e", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 57, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [0, 30]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "a_harness_to_agent", "type": "arrow", "x": 500, "y": 1010, "width": 40, "height": 0,
+      "angle": 0, "strokeColor": "#22c55e", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 58, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [40, 0]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "a_agent_to_mcp", "type": "arrow", "x": 725, "y": 1080, "width": 0, "height": 30,
+      "angle": 0, "strokeColor": "#ca8a04", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 59, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [0, 30]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": "arrow", "endArrowhead": "arrow"
+    },
+    {
+      "id": "a_agent_to_verifiers", "type": "arrow", "x": 930, "y": 880, "width": 50, "height": 0,
+      "angle": 0, "strokeColor": "#22c55e", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 60, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [50, 0]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "a_verifiers_to_gate", "type": "arrow", "x": 1180, "y": 1090, "width": 0, "height": 30,
+      "angle": 0, "strokeColor": "#22c55e", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 61, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [0, 30]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "a_gate_to_cost", "type": "arrow", "x": 1380, "y": 1200, "width": 40, "height": 0,
+      "angle": 0, "strokeColor": "#22c55e", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 62, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [40, 0]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "a_gate_to_langfuse", "type": "arrow", "x": 1380, "y": 1160, "width": 520, "height": -270,
+      "angle": 0, "strokeColor": "#f43f5e", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "dashed", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 63, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [520, -270]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "a_sqlite_to_grpo", "type": "arrow", "x": 1900, "y": 1270, "width": -1000, "height": 100,
+      "angle": 0, "strokeColor": "#f59e0b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 64, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [-1000, 100]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "t_sqlite_grpo_label", "type": "text", "x": 1300, "y": 1275, "width": 250, "height": 18,
+      "angle": 0, "strokeColor": "#d97706", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 65, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "failure clusters", "fontSize": 12, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 11, "containerId": null, "originalText": "", "lineHeight": 1.25
+    },
+    {
+      "id": "a_grpo_to_pathb", "type": "arrow", "x": 900, "y": 1450, "width": 1930, "height": 0,
+      "angle": 0, "strokeColor": "#f97316", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "dashed", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 66, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [1930, 0]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "a_pathb_to_tas", "type": "arrow", "x": 2830, "y": 1200, "width": -310, "height": -500,
+      "angle": 0, "strokeColor": "#f97316", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "dashed", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 67, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [-310, -500]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "t_pathb_pr_label", "type": "text", "x": 2590, "y": 820, "width": 230, "height": 18,
+      "angle": 0, "strokeColor": "#c2410c", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 68, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "opens proposal PR", "fontSize": 12, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 11, "containerId": null, "originalText": "", "lineHeight": 1.25
+    },
+    {
+      "id": "a_patha_to_tas", "type": "arrow", "x": 2830, "y": 400, "width": -310, "height": -100,
+      "angle": 0, "strokeColor": "#f97316", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "dashed", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 69, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [-310, -100]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "t_patha_skill_label", "type": "text", "x": 2540, "y": 290, "width": 200, "height": 18,
+      "angle": 0, "strokeColor": "#c2410c", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 70, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "writes SKILL.md + PR", "fontSize": 12, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 11, "containerId": null, "originalText": "", "lineHeight": 1.25
+    },
+    {
+      "id": "a_gate_to_output", "type": "arrow", "x": 1180, "y": 1360, "width": 0, "height": 460,
+      "angle": 0, "strokeColor": "#a855f7", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 71, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [0, 460]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "a_openrouter_to_agent", "type": "arrow", "x": 2800, "y": 1870, "width": -1870, "height": -980,
+      "angle": 0, "strokeColor": "#d97706", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "dotted", "roughness": 0, "opacity": 60,
+      "roundness": {"type": 2}, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 72, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "points": [[0, 0], [-1870, -980]], "lastCommittedPoint": null,
+      "startBinding": null, "endBinding": null,
+      "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "id": "t_openrouter_agent_label", "type": "text", "x": 1600, "y": 1380, "width": 300, "height": 18,
+      "angle": 0, "strokeColor": "#d97706", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100,
+      "roundness": null, "groupIds": [], "frameId": null, "boundElements": [],
+      "seed": 73, "version": 1, "versionNonce": 1, "isDeleted": false, "updated": 1, "link": null, "locked": false,
+      "text": "Gemini 2.5 Flash (all LLM calls)", "fontSize": 12, "fontFamily": 2,
+      "textAlign": "left", "verticalAlign": "top", "baseline": 11, "containerId": null, "originalText": "", "lineHeight": 1.25
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#f8fafc"
+  },
+  "files": {}
+}
