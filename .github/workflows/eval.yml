@@ -1,0 +1,136 @@
+name: Skill Eval Gate
+
+on:
+  pull_request:
+    paths:
+      - 'skills/**'
+
+jobs:
+  validate:
+    name: Validate skill format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -e ".[dev]"
+      - run: skills validate --all
+
+  eval:
+    name: Run eval gate
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Checkout eval platform
+        uses: actions/checkout@v4
+        with:
+          repository: Tabhi-Commons/skill-testing-playground
+          path: eval-platform
+          token: ${{ secrets.EVAL_PLATFORM_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Detect changed skill
+        id: skill
+        run: |
+          CHANGED=$(git diff --name-only HEAD^1 HEAD | grep 'skills/.*/SKILL\.md' | head -1)
+          if [ -z "$CHANGED" ]; then
+            echo "No SKILL.md changed — skipping eval"
+            echo "skill=" >> $GITHUB_OUTPUT
+          else
+            SKILL_DIR=$(dirname "$CHANGED")
+            echo "skill=$SKILL_DIR" >> $GITHUB_OUTPUT
+            echo "skill_name=$(basename $SKILL_DIR)" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install eval platform
+        if: steps.skill.outputs.skill != ''
+        run: |
+          cd eval-platform
+          pip install -e .
+
+      - name: Start mock MCP server
+        if: steps.skill.outputs.skill != ''
+        run: |
+          cd eval-platform
+          python eval/mock_mcp/server.py &
+          sleep 2
+
+      - name: Run A/B eval
+        if: steps.skill.outputs.skill != ''
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
+        run: |
+          cd eval-platform
+          python -m eval.ab_compare \
+            --skill-path "${{ github.workspace }}/${{ steps.skill.outputs.skill }}" \
+            --trials 5
+
+      - name: Post PR comment
+        if: steps.skill.outputs.skill != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const resultsPath = path.join(
+              process.env.GITHUB_WORKSPACE,
+              'eval-platform',
+              'ab_results.json'
+            );
+
+            if (!fs.existsSync(resultsPath)) {
+              console.log('ab_results.json not found — skipping PR comment');
+              return;
+            }
+
+            const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
+            const skill = '${{ steps.skill.outputs.skill_name }}';
+            const delta = results.weighted_delta ?? results.delta ?? 'n/a';
+            const regressionRate = results.regression_rate ?? 'n/a';
+            const verdict = results.verdict ?? 'UNKNOWN';
+            const langfuseUrl = results.langfuse_url ?? '';
+
+            const verdictEmoji = {
+              PASS: '✅',
+              WARN: '⚠️',
+              'SOFT BLOCK': '🔶',
+              BLOCK: '🚫',
+            }[verdict] ?? '❓';
+
+            const lines = [
+              `## ${verdictEmoji} Skill Eval: \`${skill}\` — ${verdict}`,
+              '',
+              `| Metric | Value |`,
+              `|---|---|`,
+              `| Weighted Δ | \`${typeof delta === 'number' ? delta.toFixed(3) : delta}\` |`,
+              `| Regression rate | \`${typeof regressionRate === 'number' ? (regressionRate * 100).toFixed(1) + '%' : regressionRate}\` |`,
+              `| Verdict | **${verdict}** |`,
+            ];
+
+            if (langfuseUrl) {
+              lines.push('', `[View traces in Langfuse](${langfuseUrl})`);
+            }
+
+            if (verdict === 'BLOCK' || verdict === 'SOFT BLOCK') {
+              lines.push(
+                '',
+                '> **Action required:** Review regressed tasks in the trace link above before merging.'
+              );
+            }
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: lines.join('\n'),
+            });
