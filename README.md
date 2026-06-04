@@ -358,11 +358,11 @@ skills generate disruption-handling \
   --description "Handle flight disruptions, rebooking on cancelled or delayed flights, and compensation claims." \
   --owner travel-platform
 
-# Use a different model
+# Use a different model (OpenRouter model string)
 skills generate disruption-handling \
   --description "..." \
   --owner travel-platform \
-  --model claude-sonnet-4-6
+  --model anthropic/claude-sonnet-4-6
 
 # Overwrite an existing draft
 skills generate disruption-handling --description "..." --owner travel-platform --force

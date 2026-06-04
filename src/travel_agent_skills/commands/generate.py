@@ -57,27 +57,30 @@ Rules:
 
 def _call_llm(prompt: str, model: str) -> str:
     try:
-        import anthropic
+        import openai
     except ImportError as exc:
         raise typer.BadParameter(
-            "anthropic package is required for 'skills generate'. "
-            "Install it: pip install anthropic"
+            "openai package is required for 'skills generate'. "
+            "Install it: pip install openai"
         ) from exc
 
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
         raise typer.BadParameter(
-            "ANTHROPIC_API_KEY environment variable is not set. "
+            "OPENROUTER_API_KEY environment variable is not set. "
             "Set it before running 'skills generate'."
         )
 
-    client = anthropic.Anthropic(api_key=api_key)
-    message = client.messages.create(
+    client = openai.OpenAI(
+        api_key=api_key,
+        base_url="https://openrouter.ai/api/v1",
+    )
+    msg = client.chat.completions.create(
         model=model,
         max_tokens=2048,
         messages=[{"role": "user", "content": prompt}],
     )
-    return message.content[0].text.strip()
+    return msg.choices[0].message.content.strip()
 
 
 def _build_frontmatter(name: str, description: str, author: str) -> str:
@@ -98,7 +101,7 @@ def generate_skill(
     name: str,
     description: str,
     owners: list[str],
-    model: str = "claude-haiku-4-5-20251001",
+    model: str = "anthropic/claude-haiku-4-5-20251001",
     status: str = "draft",
     tags: list[str] | None = None,
     force: bool = False,
@@ -155,7 +158,7 @@ def register(app: typer.Typer) -> None:
         name: str = typer.Argument(..., help="Skill name in lowercase hyphen-case."),
         description: str = typer.Option(..., "--description", "-d", help="Plain-English description of what the skill does and when to use it."),
         owner: list[str] = typer.Option(..., "--owner", "-o", help="Owning team. Can be repeated."),
-        model: str = typer.Option("claude-haiku-4-5-20251001", help="Anthropic model to use for drafting."),
+        model: str = typer.Option("anthropic/claude-haiku-4-5-20251001", help="OpenRouter model string to use for drafting."),
         status: str = typer.Option("draft", help="Skill lifecycle status."),
         tag: list[str] = typer.Option(None, "--tag", "-t", help="Discovery tag. Can be repeated."),
         force: bool = typer.Option(False, "--force", help="Overwrite an existing skill."),

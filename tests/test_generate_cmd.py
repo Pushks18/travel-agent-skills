@@ -145,9 +145,9 @@ def test_generate_force_overwrites(tmp_path: Path) -> None:
 def test_generate_missing_api_key_raises(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     import typer
 
-    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
 
-    with pytest.raises(typer.BadParameter, match="ANTHROPIC_API_KEY"):
+    with pytest.raises(typer.BadParameter, match="OPENROUTER_API_KEY"):
         generate_skill(
             name="disruption-handling",
             description="No key test.",
