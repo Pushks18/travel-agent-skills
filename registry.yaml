@@ -1,4 +1,49 @@
 skills:
+  fare-rules:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/fare-rules
+    status: draft
+    tags:
+    - travel
+    - fare
+    - rules
+    - policy
+    version: 0.1.0
+  hotel-search:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/hotel-search
+    status: draft
+    tags:
+    - travel
+    - hotel
+    - search
+    - accommodation
+    version: 0.1.0
+  modify-booking:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/modify-booking
+    status: draft
+    tags:
+    - travel
+    - booking
+    - modify
+    - cancel
+    version: 0.1.0
   ancillery-skill:
     distribution:
     - org-provisioned
