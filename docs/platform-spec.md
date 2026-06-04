@@ -348,6 +348,106 @@ python -m eval.registry pull --skill travel/hotel-search
 
 ---
 
+### Phase 6: Dynamic Skill Creation (Week 7-8)
+
+**Goal:** Skills can be created without a human writing SKILL.md from scratch. Two paths: a CLI command that drafts content via LLM, and an automated pipeline that proposes new skills from clustered eval failures.
+
+#### 6.1 `skills generate` CLI command
+
+A new `generate` command that calls an LLM to draft a full SKILL.md given a plain-English description, then scaffolds and registers it exactly like `skills create`.
+
+```bash
+skills generate "Handle flight disruptions, rebooking on cancelled flights, \
+  and compensation claims" \
+  --name disruption-handling \
+  --owner travel-platform
+# → drafts SKILL.md via LLM
+# → writes skills/disruption-handling/SKILL.md
+# → registers in registry.yaml
+# Output: "Created skill: skills/disruption-handling  (draft — review before opening PR)"
+```
+
+Implementation in `src/travel_agent_skills/commands/generate.py`:
+
+```python
+def generate_skill(
+    *,
+    name: str,
+    description: str,
+    owners: list[str],
+    model: str = "claude-haiku-4-5-20251001",
+    project_root: Path | None = None,
+) -> Path:
+    """Draft a SKILL.md body via LLM, scaffold the skill dir, register in registry."""
+    validate_skill_name(name)
+    root = project_root or Path.cwd()
+    prompt = GENERATE_PROMPT.format(name=name, description=description)
+    body = call_llm(prompt, model=model)          # returns markdown body only
+    frontmatter = build_frontmatter(name, description, owners[0])
+    skill_content = f"{frontmatter}\n\n{body}"
+    skill_dir = root / "skills" / name
+    skill_dir.mkdir(parents=True, exist_ok=True)
+    (skill_dir / "SKILL.md").write_text(skill_content)
+    upsert_skill_entry(root / "registry.yaml", name, SkillRegistryEntry(...))
+    return skill_dir
+```
+
+The LLM prompt instructs the model to produce:
+- A numbered workflow with `**Confirm required inputs**` as step 1
+- A required inputs table, optional inputs table
+- An output spec
+- Edge cases and quality checks
+
+The generated skill is always status `draft`. The human reviews it, edits as needed, then opens a PR. The eval gate runs as normal.
+
+#### 6.2 Automated skill proposal from eval failures (GRPO → PR)
+
+The eval platform's GRPO optimizer (`eval/optimizer/`) already clusters failed tasks and proposes skill improvements. Extend this pipeline to propose *new* skills when a task cluster has no matching skill at all.
+
+**Flow:**
+
+```
+1. GRPO optimizer clusters failed eval tasks by domain + failure mode
+2. For clusters where no skill exists → call LLM to draft SKILL.md body
+3. Write draft to travel-agent-skills/skills/<proposed-name>/SKILL.md via GitHub API
+4. Open a PR with title "proposal: auto-generated <name> skill"
+5. CI eval gate runs automatically on the PR
+6. Human reviews: edit content, approve or close PR
+```
+
+**New file in skill-testing-playground:** `eval/optimizer/propose_skill.py`
+
+```python
+def propose_skill_pr(
+    cluster: FailureCluster,
+    github_token: str,
+    repo: str = "Tabhi-Commons/travel-agent-skills",
+) -> str:
+    """Draft a new skill from a failure cluster and open a PR. Returns PR URL."""
+    skill_name = cluster.suggested_skill_name   # e.g. "disruption-handling"
+    body = draft_skill_body(cluster)            # LLM call
+    frontmatter = build_frontmatter(skill_name, cluster.description)
+    content = f"{frontmatter}\n\n{body}"
+    pr_url = open_skill_pr(
+        repo=repo,
+        skill_name=skill_name,
+        skill_content=content,
+        token=github_token,
+        title=f"proposal: auto-generated {skill_name} skill",
+        body=f"Auto-proposed from {len(cluster.tasks)} failed eval tasks "
+             f"in domain `{cluster.domain}`. Review and edit before merging.",
+    )
+    return pr_url
+```
+
+**Safeguards:**
+- Proposed skills are always `draft` status
+- PR title is prefixed `proposal:` so it is visually distinct
+- Eval gate must PASS before the PR can merge — a bad auto-generated skill cannot slip through
+- The optimizer never auto-merges — a human approves every PR
+
+---
+
 ### Phase 5: Multi-model Eval + Gate Calibration (Week 7+)
 
 **Goal:** Test skills across multiple models (Gemini 2.5 Flash, GPT-4.1-mini, Claude Haiku) to find model-skill compatibility gaps.
@@ -360,31 +460,27 @@ python -m eval.registry pull --skill travel/hotel-search
 
 ## Skill Gaps to Fill
 
-These skills need to be created in travel-agent-skills before eval can cover them:
+| Skill needed | Domain | Priority | Status |
+|-------------|--------|----------|--------|
+| `hotel-search` | hotel_search | High — 10 tasks | ✅ created |
+| `fare-rules` | fare_rules | High — 6 tasks | ✅ created |
+| `modify-booking` | edge_cases | Medium — 6 tasks | ✅ created |
+| `disruption-handling` | disruption | Low — not yet in task bank | ❌ missing |
 
-| Skill needed | Domain | Priority |
-|-------------|--------|----------|
-| `hotel-search` | hotel_search | High — 10 tasks in task bank |
-| `fare-rules` | fare_rules | High — 6 tasks in task bank |
-| `modify-booking` | edge_cases | Medium — 6 tasks in task bank |
-| `disruption-handling` | disruption | Low — not yet in task bank |
-
-The `disruption-skills` ZIP already exists in releases — this may have content worth examining.
+`disruption-handling` is a candidate for Phase 6 auto-generation from eval failure clusters.
 
 ---
 
 ## Task Bank Alignment
 
-Current task bank (50 tasks) uses these skill names that need to map to travel-agent-skills:
-
 | task.toml skill | travel-agent-skills skill | Status |
 |----------------|--------------------------|--------|
-| `flight-search` | `flight-search` | ✅ exists |
-| `book-itinerary` | `booking-skill` | needs mapping |
-| `hotel-search` | needs creating | ❌ missing |
-| `fare-rules` | needs creating | ❌ missing |
-| `modify-booking` | covered by `booking-skill` | needs mapping |
-| `ancillery` | `ancillery-skill` | ✅ exists |
+| `flight-search` | `flight-search` | ✅ aligned |
+| `booking-skill` | `booking-skill` | ✅ aligned (was `book-itinerary`, remapped) |
+| `hotel-search` | `hotel-search` | ✅ aligned |
+| `fare-rules` | `fare-rules` | ✅ aligned |
+| `modify-booking` | `modify-booking` | ✅ aligned |
+| `ancillery` | `ancillery-skill` | ⚠️ no tasks in bank yet |
 
 ---
 
@@ -433,8 +529,8 @@ Current task bank (50 tasks) uses these skill names that need to map to travel-a
 
 ## Open Questions
 
-1. **hotel-search and fare-rules skills** — should these be created in travel-agent-skills now, or wait until CI is wired?
-2. **Langfuse hosting** — self-host via Docker Compose or use langfuse.com free tier for now?
-3. **task bank mapping** — update `task.toml` files to use real skill names (`booking-skill` not `book-itinerary`), or add a name-mapping layer in the loader?
-4. **Who triggers evals** — GitHub Actions only, or also support local dev: `skills eval flight-search`?
-5. **disruption-skills ZIP** — what's in it? Worth examining before authoring new disruption skill.
+1. **Langfuse hosting** — self-host via Docker Compose or use langfuse.com free tier for now?
+2. **Who triggers evals** — GitHub Actions only, or also support local dev: `skills eval flight-search`?
+3. **disruption-handling skill** — author manually or use Phase 6 auto-generation as the first live test of that pipeline?
+4. **`skills generate` LLM model** — use Claude Haiku for cost, or Sonnet for quality? Should output go through `skills validate` automatically before writing to disk?
+5. **GRPO propose threshold** — how many failed tasks in a cluster before a skill proposal is auto-opened? Suggested default: 5+ failures in same domain with no matching skill.
