@@ -350,6 +350,70 @@ A skill folder is copied directly into another repository or project. Updates re
 
 ---
 
+## Generate a skill with LLM drafting
+
+```bash
+# Draft a full SKILL.md body via Claude Haiku. Requires ANTHROPIC_API_KEY.
+skills generate disruption-handling \
+  --description "Handle flight disruptions, rebooking on cancelled or delayed flights, and compensation claims." \
+  --owner travel-platform
+
+# Use a different model
+skills generate disruption-handling \
+  --description "..." \
+  --owner travel-platform \
+  --model claude-sonnet-4-6
+
+# Overwrite an existing draft
+skills generate disruption-handling --description "..." --owner travel-platform --force
+```
+
+The generated skill is always `status: draft`. Review `SKILL.md`, edit as needed, then open a PR — the eval gate runs automatically.
+
+---
+
+## CI / CD Setup
+
+### GitHub Secrets
+
+Secrets are configured **per repo**, not in your GitHub profile. For each repo:
+
+```
+github.com/Tabhi-Commons/travel-agent-skills
+  → Settings → Secrets and variables → Actions → New repository secret
+
+github.com/Tabhi-Commons/skill-testing-playground
+  → Settings → Secrets and variables → Actions → New repository secret
+```
+
+**Add to both repos:**
+
+| Secret | Value |
+|---|---|
+| `LANGFUSE_PUBLIC_KEY` | `pk-lf-...` |
+| `LANGFUSE_SECRET_KEY` | `sk-lf-...` |
+| `LANGFUSE_HOST` | `https://cloud.langfuse.com` |
+| `OPENROUTER_API_KEY` | `sk-or-...` |
+
+**Add only to `travel-agent-skills`:**
+
+| Secret | Value |
+|---|---|
+| `EVAL_PLATFORM_TOKEN` | GitHub PAT with `repo:read` scope on `skill-testing-playground` |
+
+### Local `.env`
+
+```bash
+# skill-testing-playground/.env and travel-agent-skills/.env
+ANTHROPIC_API_KEY=sk-ant-...
+OPENROUTER_API_KEY=sk-or-...
+LANGFUSE_PUBLIC_KEY=pk-lf-...
+LANGFUSE_SECRET_KEY=sk-lf-...
+LANGFUSE_HOST=https://cloud.langfuse.com
+```
+
+---
+
 ## Current Implementation Status
 
 The CLI is fully functional end to end. All commands are implemented, tested, and validated against the open Agent Skills specification.
