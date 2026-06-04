@@ -448,6 +448,107 @@ def propose_skill_pr(
 
 ---
 
+### Phase 7: Cost, Latency, and Quality Observability (Week 8)
+
+**Goal:** Every eval run reports token cost (USD), latency (avg + p95), and token breakdown so skill authors can see if a skill improves quality without blowing up cost or latency.
+
+#### Metrics tracked per run
+
+| Metric | Source | Stored in |
+|--------|--------|-----------|
+| `input_tokens` | `usage_metadata.input_tokens` from LLM response | `EvalResult` |
+| `output_tokens` | `usage_metadata.output_tokens` | `EvalResult` |
+| `cost_usd` | `eval/cost.py` pricing table × tokens | `EvalResult` |
+| `latency_ms` | wall-clock time for full agent invoke | `EvalResult` |
+| `latency_delta_ms` | `with_skill.latency_ms - no_skill.latency_ms` | `ABResult` |
+| `cost_delta_usd` | `with_skill.cost_usd - no_skill.cost_usd` | `ABResult` |
+
+#### Pricing table (`eval/cost.py`)
+
+| Model | Input $/1M | Output $/1M |
+|-------|-----------|------------|
+| `google/gemini-2.5-flash` | $0.15 | $0.60 |
+| `anthropic/claude-haiku-4-5` | $0.80 | $4.00 |
+| `anthropic/claude-sonnet-4-6` | $3.00 | $15.00 |
+| `openai/gpt-4.1-mini` | $0.40 | $1.60 |
+
+#### Report output (ab_compare)
+
+```
+task                           weight  no_skill  with_skill    delta   lat_Δms    cost_Δ  flag
+hotel-search-001                  2.0      0.80        1.00    +0.20      +120  +$0.0002  +
+
+                               no_skill    with_skill
+total cost (USD)               $0.0240       $0.0310
+avg cost / run (USD)           $0.0024       $0.0031
+avg latency (ms)                  1820          1940
+p95 latency (ms)                  2100          2280
+total input tokens               48000         61000
+total output tokens               6000          7800
+```
+
+A skill that adds +0.20 delta but +$0.0007/run and +120ms latency is a known trade-off. The gate check only blocks on quality delta, but the cost/latency data is visible to the PR author.
+
+---
+
+### Phase 8: Multi-Agent Orchestrator (Week 9+)
+
+**Goal:** Replace the monolithic single-agent with a router + specialized agents, one per skill domain.
+
+#### Current architecture (monolithic)
+
+```
+User message → Single LangGraph agent (all 9 tools + skill as system prompt)
+               LLM decides which tool to call — implicit routing
+```
+
+The skill injection guides the LLM but there is no explicit routing layer. One agent handles everything.
+
+#### Target architecture (orchestrated)
+
+```
+User message → Router → FlightSearchAgent     (skill: flight-search)
+                      → HotelSearchAgent      (skill: hotel-search)
+                      → BookingAgent          (skill: booking-skill)
+                      → FareRulesAgent        (skill: fare-rules)
+                      → ModifyBookingAgent    (skill: modify-booking)
+                      → AncilleryAgent        (skill: ancillery-skill)
+                      → PlanningAgent         (skill: planning-skill)
+```
+
+#### Router implementation
+
+```python
+# agent/router.py
+from eval.skill_router import SkillRouter
+
+class AgentRouter:
+    def __init__(self, skills_dir: Path):
+        self.router = SkillRouter.from_skill_dir(skills_dir)
+        self.agents = self._build_agents()
+
+    def route(self, instruction: str):
+        match = self.router.route(instruction)        # embedding + cosine sim
+        if match is None or match.score < 0.35:
+            return self.agents["planning-skill"]      # fallback: planning
+        return self.agents[match.skill_name]
+```
+
+The `SkillRouter` already built in Phase 2 (`eval/skill_router.py`) is the routing engine — `all-MiniLM-L6-v2` embeddings, cosine similarity, 80MB local model, <1ms per query after first load. No LLM call needed for routing.
+
+#### Why embeddings over LLM routing
+
+| LLM routing | Embedding routing |
+|-------------|------------------|
+| ~$0.001/query, ~800ms | ~$0/query, <1ms after load |
+| More accurate on edge cases | 6/7 correct on travel domain |
+| Adds latency to every user turn | Zero latency overhead |
+| Needs API key | Runs fully offline |
+
+For the travel domain with well-described skills, embedding routing is accurate enough and has zero runtime cost.
+
+---
+
 ### Phase 5: Multi-model Eval + Gate Calibration (Week 7+)
 
 **Goal:** Test skills across multiple models (Gemini 2.5 Flash, GPT-4.1-mini, Claude Haiku) to find model-skill compatibility gaps.
