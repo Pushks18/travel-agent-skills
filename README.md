@@ -362,7 +362,7 @@ skills generate disruption-handling \
 skills generate disruption-handling \
   --description "..." \
   --owner travel-platform \
-  --model anthropic/claude-sonnet-4-6
+  --model google/gemini-2.5-pro
 
 # Overwrite an existing draft
 skills generate disruption-handling --description "..." --owner travel-platform --force
