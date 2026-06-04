@@ -68,6 +68,9 @@ jobs:
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
+          LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+          LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+          LANGFUSE_HOST: ${{ secrets.LANGFUSE_HOST }}
         run: |
           cd eval-platform
           python -m eval.ab_compare \
@@ -95,16 +98,13 @@ jobs:
 
             const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
             const skill = '${{ steps.skill.outputs.skill_name }}';
-            const delta = results.weighted_delta ?? results.delta ?? 'n/a';
+            const delta = results.weighted_delta ?? 'n/a';
             const regressionRate = results.regression_rate ?? 'n/a';
             const verdict = results.verdict ?? 'UNKNOWN';
-            const langfuseUrl = results.langfuse_url ?? '';
+            const regressionTraces = results.regression_traces ?? {};
 
             const verdictEmoji = {
-              PASS: '✅',
-              WARN: '⚠️',
-              'SOFT BLOCK': '🔶',
-              BLOCK: '🚫',
+              PASS: '✅', WARN: '⚠️', SOFT_BLOCK: '🔶', BLOCK: '🚫',
             }[verdict] ?? '❓';
 
             const lines = [
@@ -117,15 +117,16 @@ jobs:
               `| Verdict | **${verdict}** |`,
             ];
 
-            if (langfuseUrl) {
-              lines.push('', `[View traces in Langfuse](${langfuseUrl})`);
+            const traceEntries = Object.entries(regressionTraces);
+            if (traceEntries.length > 0) {
+              lines.push('', '**Regressed tasks — Langfuse traces:**');
+              for (const [taskId, url] of traceEntries) {
+                lines.push(url ? `- [\`${taskId}\`](${url})` : `- \`${taskId}\` (no trace)`);
+              }
             }
 
-            if (verdict === 'BLOCK' || verdict === 'SOFT BLOCK') {
-              lines.push(
-                '',
-                '> **Action required:** Review regressed tasks in the trace link above before merging.'
-              );
+            if (verdict === 'BLOCK' || verdict === 'SOFT_BLOCK') {
+              lines.push('', '> **Action required:** Fix regressions above before merging.');
             }
 
             await github.rest.issues.createComment({
