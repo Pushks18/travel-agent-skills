@@ -1,6 +1,6 @@
 ---
 name: booking-skill
-description: Guidance for the booking skill workflow. Use when agents need to perform, review, or standardize booking skill tasks.
+description: Complete a flight or hotel booking end-to-end. Use when users want to confirm and finalize a reservation, provide passenger details, or complete a purchase after selecting a flight or hotel. Covers single and multi-passenger bookings, round-trips, and itinerary confirmation.
 license: Apache-2.0
 metadata:
   author: travel-platform
@@ -11,21 +11,65 @@ metadata:
 
 ## Workflow
 
-1. Confirm the user's goal and identify any missing required inputs.
-2. Use approved tools, references, scripts, or assets for this skill.
-3. Avoid inventing facts, results, prices, availability, policies, or source-specific details.
-4. Summarize the result in the format expected by the consuming team or project.
+1. **Identify what is being booked.** Confirm whether the user is booking a flight, hotel, or both. If a prior search was performed in this session, carry forward the selected option. Do not re-search unless the user requests it.
+
+2. **Confirm the selected option.** Repeat back the key details — flight number, route, date, cabin class, price — and ask the user to confirm before proceeding.
+
+3. **Collect passenger details.** For each passenger, collect:
+   - Full legal name (as it appears on ID/passport)
+   - Date of birth
+   - Contact email and phone number
+   - Passport or national ID number (for international flights)
+   - Frequent flyer number (optional)
+
+4. **Validate passenger information.** Check that names contain no special characters that would be rejected, dates of birth are plausible, and contact details are complete. Flag any issues before attempting to book.
+
+5. **Check availability.** Confirm the selected flight or hotel is still available at the quoted price. If it is no longer available, inform the user immediately and offer to re-search.
+
+6. **Create the booking.** Submit the booking using the approved booking tool. Do not fabricate confirmation numbers, PNR codes, or booking IDs.
+
+7. **Confirm the booking.** Present the confirmed booking details:
+   - Booking reference / PNR
+   - Passenger name(s)
+   - Flight or hotel details
+   - Total price charged
+   - Cancellation and change policy summary
+
+8. **Offer next steps.** Ask if the user needs ancillary services (seat selection, baggage, insurance), wants to add a hotel, or needs the itinerary sent.
 
 ## Required Inputs
 
-- Define the minimum inputs needed to perform this skill reliably.
+| Input | Notes |
+|---|---|
+| Flight or hotel selection | From a prior search or explicitly stated by the user |
+| Passenger full name | Legal name matching travel document |
+| Date of birth | Required for all passengers |
+| Contact email | For booking confirmation |
+| Contact phone | For disruption notifications |
+
+## Optional Inputs
+
+| Input | Default |
+|---|---|
+| Passport / ID number | Required for international; optional for domestic |
+| Frequent flyer number | No loyalty points applied if omitted |
+| Seat preference | Assigned automatically if not specified |
 
 ## Output
 
-- Define the standard response format for this skill.
+Confirmed booking summary including:
+- Booking reference / PNR
+- Passenger(s) name and details
+- Flight: number, route, date, departure time, cabin class
+- Total price and currency
+- Cancellation policy (free cancellation window, fees after)
 
-## Quality Checks
+## Edge Cases and Quality Checks
 
-- Verify required inputs are present.
-- Verify referenced files or data sources were actually used when required.
-- State important assumptions and limitations.
+- If availability has changed since the search, do not proceed — inform the user and offer alternatives.
+- If passenger name contains characters that are not accepted (special characters, excessive length), ask the user to re-enter.
+- Do not proceed with a booking if required passenger fields are missing.
+- Never fabricate booking reference numbers, PNR codes, or ticket numbers.
+- For multi-passenger bookings, collect and validate details for every passenger before submitting.
+- If the booking fails, explain the reason clearly and suggest re-trying or contacting support.
+- For round-trips, confirm both legs are included in a single booking where possible.
