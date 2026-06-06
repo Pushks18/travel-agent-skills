@@ -1,6 +1,6 @@
 ---
 name: ancillery-skill
-description: Add ancillary services to a flight booking. Use when users want to add seat selection, extra baggage, travel insurance, lounge access, priority boarding, car rental, or airport transfers after selecting or booking a flight. Also use when users ask about upgrade options, add-on costs, or what extras are available for their trip.
+description: Purchase an add-on service for a flight booking the traveler already holds — seat selection, priority boarding, airport lounge pass, travel insurance, car rental, or airport transfer. Use when the traveler asks to ADD or PURCHASE one of these optional extras — "add seat selection for my flight", "book me a lounge pass", "add priority boarding to my ticket", "add travel insurance to my reservation", "add a checked bag", or "upgrade to business class while I wait". This skill adds services; it does not rebook flights or handle airline-caused disruptions.
 license: Apache-2.0
 metadata:
   author: travel-platform
@@ -23,7 +23,7 @@ Ancillary services are add-ons purchased beyond the base flight ticket. They rep
 
 ## Workflow
 
-1. **Identify the booking context.** Confirm the flight booking reference or selected flight this ancillary request applies to. If no booking is in context, ask the user to confirm the flight first.
+1. **Identify the booking context.** If a booking reference is present in the request, use it immediately. Only ask the user to provide a booking reference if it is genuinely absent from the conversation.
 
 2. **Identify what the user wants.** Ask which ancillary service(s) they want to add. If the user is unsure, present available categories with brief descriptions and pricing.
 

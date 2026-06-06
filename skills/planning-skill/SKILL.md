@@ -1,6 +1,6 @@
 ---
 name: planning-skill
-description: Plan a complete multi-component trip itinerary. Use when users want to plan a full trip — not just a single flight or hotel — including suggestions for flights, accommodation, activities, and logistics. Use when users say "plan a trip to X", "I want to visit Y for Z days", or ask for an end-to-end travel plan with multiple components.
+description: Build a complete multi-day travel itinerary spanning flights, accommodation, and activities. Use when a traveler says "plan a trip to X", "create an itinerary for Y days", "I want to visit Z for a week", or asks for a day-by-day outline covering multiple components across several days. Best for open-ended trip design when no single booking or search has been identified yet.
 license: Apache-2.0
 metadata:
   author: travel-platform

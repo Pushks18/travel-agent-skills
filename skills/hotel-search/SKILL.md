@@ -1,6 +1,6 @@
 ---
 name: hotel-search
-description: Search, compare, and summarise hotel options. Use when users ask for hotel availability, accommodation options, room types, hotel ratings, amenity comparisons, location guidance, or price-aware hotel recommendations for a destination.
+description: Find and compare hotels or accommodation in a city or area. Use when a traveler asks "find hotels", "search hotels", "what hotels are available in X", "show me accommodation near Y", "are there pet-friendly hotels", "find a 4-star hotel", or wants to browse room types, star ratings, amenities, nightly rates, or extended-stay options for a specific destination and date range.
 license: Apache-2.0
 metadata:
   author: travel-platform
@@ -11,7 +11,7 @@ metadata:
 
 ## Workflow
 
-1. **Confirm required inputs.** Ask for any missing required fields before searching. Do not guess destination, check-in or check-out dates, or guest count.
+1. **Check required inputs.** If destination and check-in/check-out dates are present in the request, proceed immediately to search. Only ask for missing fields if they are genuinely absent — do not ask to reconfirm information the user has already provided.
 2. **Identify accommodation preferences.** Determine whether the user has stated a preferred area, property type (hotel, apartment, hostel, resort), star rating, or specific amenities. Note any hard requirements such as wheelchair accessibility, pet-friendly policy, pool, or gym.
 3. **Search for hotels.** Query available accommodation options using the confirmed inputs. Include a range of price points unless the user has specified a budget ceiling.
 4. **Filter results.** Apply user-stated preferences: location, star rating, amenities, price range, cancellation policy, or breakfast inclusion.

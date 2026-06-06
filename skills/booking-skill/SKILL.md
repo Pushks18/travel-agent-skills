@@ -1,6 +1,6 @@
 ---
 name: booking-skill
-description: Complete a flight or hotel booking end-to-end. Use when users want to confirm and finalize a reservation, provide passenger details, or complete a purchase after selecting a flight or hotel. Covers single and multi-passenger bookings, round-trips, and itinerary confirmation.
+description: Purchase and confirm a brand-new flight ticket or hotel reservation. Use when the traveler says "book a flight to X for [name]", "reserve a hotel room", "book me into the Marriott", "get me a ticket to Chicago", "book the Hilton Garden Inn", "book this flight", or wants to buy and receive a booking confirmation number. Creates the reservation from scratch with passenger details and payment.
 license: Apache-2.0
 metadata:
   author: travel-platform
@@ -13,7 +13,7 @@ metadata:
 
 1. **Identify what is being booked.** Confirm whether the user is booking a flight, hotel, or both. If a prior search was performed in this session, carry forward the selected option. Do not re-search unless the user requests it.
 
-2. **Confirm the selected option.** Repeat back the key details — flight number, route, date, cabin class, price — and ask the user to confirm before proceeding.
+2. **Confirm the selected option.** If the user has already indicated which flight or hotel they want, proceed to collect passenger details without asking for reconfirmation. Only confirm if the selection is ambiguous.
 
 3. **Collect passenger details.** For each passenger, collect:
    - Full legal name (as it appears on ID/passport)

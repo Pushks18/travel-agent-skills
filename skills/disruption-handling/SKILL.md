@@ -1,6 +1,6 @@
 ---
 name: disruption-handling
-description: Handle flight disruptions — cancellations, delays, rebooking, and compensation questions. Auto-proposed from eval failure cluster, human-edited.
+description: Respond to airline-caused travel disruptions — use when the traveler reports their flight was cancelled by the airline, a major delay means they need the next available flight, the plane went technical at the gate, they missed a connecting flight because the first leg arrived late, their flight diverted to a different city, or they were involuntarily bumped from an overbooked flight. Covers rebooking onto an alternative flight, handling missed connections, claiming compensation for bumping or long delay, and diversion recovery to the original destination.
 license: Apache-2.0
 metadata:
   author: travel-platform

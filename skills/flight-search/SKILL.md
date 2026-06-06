@@ -1,6 +1,6 @@
 ---
 name: flight-search
-description: Search, compare, and summarize flight options. Use when users ask for airfare, routes, flight availability, airline comparisons, layovers, cabin classes, baggage policies, or price-aware flight recommendations for single or multi-leg trips.
+description: Find and compare available flights between two cities. Use when a traveler says "find flights from X to Y", "search for flights", "what flights go from SFO to JFK", "I need a roundtrip to Seattle", "show me airfare", "are there budget flights to Z", "I want to fly to Denver on this date", or "I need a business class seat to London". Covers browsing routes, schedules, prices, stops, cabin class availability, and airline options.
 license: Apache-2.0
 metadata:
   author: travel-platform
@@ -11,7 +11,7 @@ metadata:
 
 ## Workflow
 
-1. **Confirm required inputs.** Ask the user for any missing required fields before proceeding. Do not guess origin, destination, or travel dates.
+1. **Check required inputs.** If origin, destination, or departure date are present in the request, proceed immediately to search. Only ask for missing fields if they are genuinely absent — do not ask to reconfirm information the user has already provided.
 2. **Identify trip type.** Determine if the request is one-way, round-trip, or multi-city. Apply the appropriate search logic for each leg.
 3. **Search for flights.** Query available flight data using the user's confirmed inputs. Search all relevant cabin classes unless the user has specified one.
 4. **Filter results.** Apply any user preferences: number of stops, preferred airlines, departure time windows, maximum layover duration, or baggage requirements.

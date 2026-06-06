@@ -1,6 +1,6 @@
 ---
 name: fare-rules
-description: Look up and explain fare rules for a flight booking or fare class. Use when users ask about change fees, cancellation policies, refund eligibility, baggage allowances, seat selection restrictions, name change rules, or upgrade conditions tied to a specific fare or booking.
+description: Look up and explain the cancellation rules, refund policy, and change fees that apply to a ticket. Use when a traveler asks a policy question — "what are the cancellation rules for my flight", "is my booking refundable", "can I change my flight date and what does it cost", "does my ticket allow a free date change without a fee", "what is the baggage allowance", "how much is it to cancel my reservation", "what is the no-show policy if I miss due to traffic". Answers whether the fare is refundable, what change fees apply, and what the baggage terms and no-show conditions allow.
 license: Apache-2.0
 metadata:
   author: travel-platform

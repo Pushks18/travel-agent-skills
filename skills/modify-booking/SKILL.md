@@ -1,6 +1,6 @@
 ---
 name: modify-booking
-description: Modify or cancel an existing flight or hotel booking. Use when users want to change travel dates, update passenger contact details, switch cabin class, cancel a reservation, request a refund, or make any post-booking change to a confirmed reservation.
+description: Execute a traveler-requested update to an existing confirmed booking. Use when the traveler is ready to act and gives a direct instruction — "change my return flight from Dec 12 to Dec 15", "move my hotel check-out from Friday to Sunday on booking BK8812", "update the passenger name on my reservation — it is spelled wrong", or "reschedule my trip to a different date". Applies the update — rescheduling to new travel dates, correcting a passenger name, or switching cabin class on an existing reservation.
 license: Apache-2.0
 metadata:
   author: travel-platform
