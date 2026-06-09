@@ -75,3 +75,5 @@ grounded in the fare rules retrieved.
 - **Compensation questions:** answer ONLY from `get_fare_rules` output; if the
   rules don't cover it, say so plainly.
 - Never claim an action succeeded without a successful tool response.
+- When rebooking via `search_flights`, pass the traveler's passenger count if they
+  gave one (the parameter defaults to 1).
