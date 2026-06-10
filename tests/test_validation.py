@@ -281,3 +281,37 @@ def test_validate_skill_fails_for_invalid_registry_status(tmp_path) -> None:
 
     assert not result.passed
     assert any("status" in error for error in result.errors)
+
+
+# ── discover_skills: nested suite support ────────────────────────────────────
+
+def _mk_skill(dir_path, name):
+    dir_path.mkdir(parents=True)
+    (dir_path / "SKILL.md").write_text(
+        f"---\nname: {name}\ndescription: d\n---\n# {name}\n", encoding="utf-8"
+    )
+
+
+def test_discover_skills_flat_and_suite(tmp_path):
+    from travel_agent_skills.validation import discover_skills
+
+    _mk_skill(tmp_path / "skills" / "flight-search", "flight-search")
+    # suite: parent has no SKILL.md, children do
+    _mk_skill(tmp_path / "skills" / "disruption-skill" / "flight-delay-detection",
+              "flight-delay-detection")
+    _mk_skill(tmp_path / "skills" / "disruption-skill" / "gate-terminal-change",
+              "gate-terminal-change")
+    # junk dir with neither SKILL.md nor sub-skills is skipped
+    (tmp_path / "skills" / "scratch" / "notes").mkdir(parents=True)
+
+    found = {p.name for p in discover_skills(tmp_path)}
+    assert found == {"flight-search", "flight-delay-detection", "gate-terminal-change"}
+
+
+def test_discover_skills_suite_parent_not_returned(tmp_path):
+    from travel_agent_skills.validation import discover_skills
+
+    _mk_skill(tmp_path / "skills" / "disruption-skill" / "car-disruption-detection",
+              "car-disruption-detection")
+    names = [p.name for p in discover_skills(tmp_path)]
+    assert "disruption-skill" not in names

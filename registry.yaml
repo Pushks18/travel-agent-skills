@@ -1,4 +1,107 @@
 skills:
+  ancillery-skill:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/ancillery-skill
+    status: draft
+    tags:
+    - travel
+    - ancillery
+    - skill
+    version: 0.1.0
+  booking-skill:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/booking-skill
+    status: draft
+    tags:
+    - travel
+    - booking
+    - skill
+    version: 0.1.0
+  car-disruption-detection:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/disruption-skill/car-disruption-detection
+    status: draft
+    tags:
+    - travel
+    - disruption
+    - detection
+    - suite:disruption-skill
+    version: 0.1.0
+  disruption-agent-common-policy:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/disruption-skill/disruption-agent-common-policy
+    status: draft
+    tags:
+    - travel
+    - disruption
+    - detection
+    - suite:disruption-skill
+    version: 0.1.0
+  disruption-handling:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/disruption-handling
+    status: draft
+    tags:
+    - travel
+    - disruption
+    - execute
+    - skill
+    version: 0.1.0
+  experience-disruption-detection:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/disruption-skill/experience-disruption-detection
+    status: draft
+    tags:
+    - travel
+    - disruption
+    - detection
+    - suite:disruption-skill
+    version: 0.1.0
+  external-disruption-detection:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/disruption-skill/external-disruption-detection
+    status: draft
+    tags:
+    - travel
+    - disruption
+    - detection
+    - suite:disruption-skill
+    version: 0.1.0
   fare-rules:
     distribution:
     - org-provisioned
@@ -13,6 +116,81 @@ skills:
     - fare
     - rules
     - policy
+    version: 0.1.0
+  flight-delay-detection:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/disruption-skill/flight-delay-detection
+    status: draft
+    tags:
+    - travel
+    - disruption
+    - detection
+    - suite:disruption-skill
+    version: 0.1.0
+  flight-disruption-detection:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/disruption-skill/flight-disruption-detection
+    status: draft
+    tags:
+    - travel
+    - disruption
+    - detection
+    - suite:disruption-skill
+    version: 0.1.0
+  flight-risk-detection:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/disruption-skill/flight-risk-detection
+    status: draft
+    tags:
+    - travel
+    - disruption
+    - detection
+    - suite:disruption-skill
+    version: 0.1.0
+  flight-search:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/flight-search
+    status: draft
+    tags:
+    - travel
+    - flight
+    - search
+    - airfare
+    version: 0.1.0
+  gate-terminal-change:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/disruption-skill/gate-terminal-change
+    status: draft
+    tags:
+    - travel
+    - disruption
+    - detection
+    - suite:disruption-skill
     version: 0.1.0
   hotel-search:
     distribution:
@@ -44,49 +222,6 @@ skills:
     - modify
     - cancel
     version: 0.1.0
-  ancillery-skill:
-    distribution:
-    - org-provisioned
-    - zip
-    - project-local
-    owners:
-    - travel-platform
-    path: skills/ancillery-skill
-    status: draft
-    tags:
-    - travel
-    - ancillery
-    - skill
-    version: 0.1.0
-  booking-skill:
-    distribution:
-    - org-provisioned
-    - zip
-    - project-local
-    owners:
-    - travel-platform
-    path: skills/booking-skill
-    status: draft
-    tags:
-    - travel
-    - booking
-    - skill
-    version: 0.1.0
-  flight-search:
-    distribution:
-    - org-provisioned
-    - zip
-    - project-local
-    owners:
-    - travel-platform
-    path: skills/flight-search
-    status: draft
-    tags:
-    - travel
-    - flight
-    - search
-    - airfare
-    version: 0.1.0
   planning-skill:
     distribution:
     - org-provisioned
@@ -100,4 +235,19 @@ skills:
     - travel
     - planning
     - skill
+    version: 0.1.0
+  stay-disruption-detection:
+    distribution:
+    - org-provisioned
+    - zip
+    - project-local
+    owners:
+    - travel-platform
+    path: skills/disruption-skill/stay-disruption-detection
+    status: draft
+    tags:
+    - travel
+    - disruption
+    - detection
+    - suite:disruption-skill
     version: 0.1.0

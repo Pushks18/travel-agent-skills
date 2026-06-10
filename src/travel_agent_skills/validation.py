@@ -125,8 +125,23 @@ def validate_skill(skill_dir: Path, project_root: Path | None = None) -> Validat
 
 
 def discover_skills(project_root: Path) -> list[Path]:
-    """Return skill directories under the project skills folder."""
+    """Return skill directories under the project skills folder.
+
+    A top-level directory with SKILL.md is a skill. A top-level directory
+    WITHOUT one is a suite (e.g. skills/disruption-skill/): each of its
+    sub-directories containing SKILL.md is a skill in its own right.
+    Directories with neither are skipped.
+    """
     skills_dir = project_root / "skills"
     if not skills_dir.exists():
         return []
-    return sorted(path for path in skills_dir.iterdir() if path.is_dir())
+    discovered: list[Path] = []
+    for path in sorted(p for p in skills_dir.iterdir() if p.is_dir()):
+        if (path / "SKILL.md").exists():
+            discovered.append(path)
+        else:
+            discovered.extend(
+                sub for sub in sorted(path.iterdir())
+                if sub.is_dir() and (sub / "SKILL.md").exists()
+            )
+    return discovered

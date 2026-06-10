@@ -1,0 +1,16 @@
+artifact: disruption-handling.zip
+created_at: '2026-06-04T20:35:49.105142+00:00'
+distribution:
+- org-provisioned
+- zip
+- project-local
+name: disruption-handling
+owners:
+- travel-platform
+sha256: ce11d17812d102dec6fb09d4f85a48d8fc004f863eb75d19b3e62b8f9c61677e
+status: draft
+tags:
+- travel
+- disruption
+- rebooking
+version: 0.1.0
