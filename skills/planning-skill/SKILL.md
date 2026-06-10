@@ -28,6 +28,8 @@ metadata:
 
 3. **Build the accommodation component with the 'search_hotels' tool.** Use the tool to search for hotels near the user's preferred area (city centre, near venue, near airport). Present 2-3 options covering different price points. Note star rating, location, and included amenities.
 
+   If the travel request spans multiple cities with specific transitions (e.g. Sydney to Brisbane to Melbourne), call 'search_flights' or 'search_hotels' for each segment in the indicated order and timing, then consolidate the segments into one itinerary.
+
 4. **Suggest a daily activity outline.** Based on trip duration and purpose, suggest a lightweight day-by-day outline:
    - Day 1: Arrival, check-in, nearby dinner
    - Day 2+: Key attractions, experiences, or meetings relevant to the purpose
@@ -74,12 +76,13 @@ A structured trip plan containing:
 ## Edge Cases and Quality Checks
 
 - If the destination is vague (e.g. "somewhere warm"), ask the user to choose between 2-3 suggested destinations rather than guessing.
-- If travel dates are relative ("next month", "in summer"), confirm exact dates before searching.
+- If travel dates are flexible or relative ("next month", "any weekend in May"), pick a reasonable concrete date within the stated range, state the assumption clearly, and search — do not block the search waiting for date confirmation.
 - Do not fabricate specific restaurant names, attraction ticket prices, or local transport schedules — state that these are suggestions to research.
 - For business trips, prioritise hotels near the meeting venue and direct flights where possible.
 - For family trips, flag child-friendly accommodation and activities.
-- If the budget is very low for the destination and dates, say so clearly rather than presenting options that exceed it.
+- If the budget is very low for the destination and dates, briefly note the constraint, then still run 'search_flights' and 'search_hotels' to ground the answer in what is actually available — report the cheapest real options even if they exceed the stated budget.
 - Keep the daily outline lightweight — this is a starting framework, not a minute-by-minute schedule.
 - Always note that hotel and flight prices are subject to change and should be confirmed at time of booking.
 - Always include the number of passengers for flights and the number of guests for hotels in tool calls. Confirm these numbers if they are not explicitly stated by the user.
 - An itinerary build request is not satisfied by a text-only response: call 'search_flights' and 'search_hotels' with all required parameters (origin, destination, date, and passenger count for flights; location, check-in, check-out, and guest count for hotels), and use 'create_booking' only when the user has requested or confirmed a booking.
+- When adding extra services to a booking (e.g. a car rental), fill in all parameters of the 'add_ancillary' tool call, including the service details describing what is being added.
