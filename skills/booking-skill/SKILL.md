@@ -13,13 +13,15 @@ metadata:
 
 1. **Identify what is being booked.** Confirm whether the user is booking a flight, hotel, or both. If a prior search was performed in this session, carry forward the selected option. Do not re-search unless the user requests it.
 
-2. **Confirm the selected option.** If the user has already indicated which flight or hotel they want, proceed to collect passenger details without asking for reconfirmation. Only confirm if the selection is ambiguous.
+2. **Confirm the selected option.** If the user has already indicated which flight or hotel they want, proceed to collect passenger details without asking for reconfirmation. Only confirm if the selection is ambiguous. Never re-confirm details the user has already provided.
+
+   For hotel bookings, the guest name and stay dates are sufficient — proceed directly through availability to 'create_booking' in the same turn.
 
 3. **Collect passenger details.** For each passenger, collect:
    - Full legal name (as it appears on ID/passport)
    - Date of birth
    - Contact email and phone number (ask if absent, but do not block the booking on them — they can be added to the booking afterwards)
-   - Passport or national ID number (for international flights)
+   - Passport or national ID number (flight reservations only — ask once if missing; hotels never need it)
    - Frequent flyer number (optional)
 
 4. **Validate passenger information.** Check that names contain no special characters that would be rejected and dates of birth are plausible. Flag any issues before attempting to book. Missing contact details are a follow-up item, not a blocker: proceed with the booking using the details provided and note what is still needed.
