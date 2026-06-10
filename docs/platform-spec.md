@@ -549,6 +549,204 @@ For the travel domain with well-described skills, embedding routing is accurate 
 
 ---
 
+### Phase 9: Parallel Eval Execution (Speed)
+
+**Goal:** Reduce eval wall-clock time from O(tasks × trials × 2) sequential LLM calls to near O(1) with a concurrency cap.
+
+#### The bottleneck
+
+Current execution is fully sequential:
+
+```
+run_ab_compare
+  for task in tasks:              ← sequential
+    for trial in n_trials:        ← sequential
+      run_task(no_skill)          ← blocks
+      run_task(with_skill)        ← blocks
+```
+
+For `hotel-search`: 10 tasks × 5 trials × 2 conditions = **100 sequential LLM calls**.
+At ~2s/call → ~200s (3+ min) for one skill, ~40+ min for a full suite.
+The event loop wraps each `run_task` in `run_in_executor` but the outer loops are sequential,
+so no actual concurrency is happening.
+
+#### Options (ranked by effort vs. impact)
+
+---
+
+**Option A: asyncio.gather + Semaphore (recommended — minimal change, ~10x speedup)**
+
+Replace the sequential task loop in `run_ab_compare` with `asyncio.gather`.
+Within each task, also gather all `n_trials` of both conditions concurrently.
+A `asyncio.Semaphore(N)` caps inflight LLM calls to stay under rate limits.
+
+```python
+# eval/ab_compare.py
+SEM = asyncio.Semaphore(10)   # max 10 concurrent LLM calls
+
+async def run_ab_for_task(task_path, skill_path, n_trials, model):
+    async with SEM:
+        coros = [
+            loop.run_in_executor(None, run_task, task_path, cond, ...)
+            for cond in [None, skill_path] * n_trials   # all trials, both conditions
+        ]
+        all_results = await asyncio.gather(*coros)
+        no_skill_results  = all_results[:n_trials]
+        with_skill_results = all_results[n_trials:]
+        ...
+
+async def run_ab_compare(skill_name, skill_path, n_trials, model):
+    tasks = load_tasks_for_skill(skill_name, skill_path)
+    results = await asyncio.gather(*[
+        run_ab_for_task(t, skill_path, n_trials, model) for t in tasks
+    ])
+    return list(results)
+```
+
+Tradeoff: progress lines no longer print in order. Fix with `asyncio.as_completed` for
+streaming + `asyncio.gather` for final collection. The SSE endpoint in `skill_server.py`
+would need a queue to forward task completion events out-of-order.
+
+Estimated speedup: **~10x** for 10 tasks with semaphore=10. Wall-clock drops from ~200s to ~20s.
+
+---
+
+**Option B: Parallelize trials only, keep tasks sequential (safe path for streaming UI)**
+
+Keep the outer task loop sequential (preserves streaming order for the `/eval` page).
+Within each task, run all `n_trials × 2` conditions concurrently.
+
+```python
+async def run_ab_for_task(task_path, skill_path, n_trials, model):
+    loop = asyncio.get_event_loop()
+    coros = (
+        [loop.run_in_executor(None, run_task, task_path, None,       "no_skill",   ...) for _ in range(n_trials)] +
+        [loop.run_in_executor(None, run_task, task_path, skill_path, "with_skill", ...) for _ in range(n_trials)]
+    )
+    all_results = await asyncio.gather(*coros)
+    no_skill_results  = all_results[:n_trials]
+    with_skill_results = all_results[n_trials:]
+```
+
+Tasks still run one-by-one so the UI gets a progress line per task. Each task is now
+`n_trials × 2` calls wide instead of deep. Speedup: **~5-10x per task** (one trial becomes
+one concurrent batch).
+
+Minimal change to existing code — no semaphore needed since the outer loop acts as a
+natural rate limiter. This is the lowest-risk option.
+
+---
+
+**Option C: Task queue — Celery + Redis (best for the web eval runner)**
+
+Push each `run_task` call as a Celery task. Workers (N configurable) pull from the queue.
+The FastAPI `/api/eval/run` endpoint enqueues all tasks and streams progress via SSE as
+workers report completion.
+
+```python
+# eval/tasks.py
+from celery import Celery
+app = Celery("eval", broker="redis://localhost:6379/0")
+
+@app.task
+def run_task_job(task_path, skill_path, condition, model):
+    return dataclasses.asdict(run_task(task_path, skill_path, condition, model))
+```
+
+```python
+# skill_server.py — POST /api/eval/run
+jobs = group([
+    run_task_job.s(str(t), str(skill_path), cond, model)
+    for t in tasks for cond in ["no_skill", "with_skill"] for _ in range(n_trials)
+])
+result = jobs.apply_async()
+# SSE stream: yield as each task completes via result.get(callback=...)
+```
+
+Pros: eval jobs survive server restarts; workers scale horizontally; no timeout risk
+for long evals; natural backpressure via queue depth.
+Cons: adds Redis + Celery as infrastructure dependencies; overkill for CLI use.
+
+Recommended for the Phase 3 web platform's eval runner. The CLI path can remain asyncio-only.
+
+---
+
+**Option D: GitHub Actions matrix (CI only)**
+
+Split tasks across parallel runners using a matrix strategy. Each runner handles a
+shard of the task list and writes a partial `ab_results_{shard}.json`. A final job
+merges the shards and runs gate_check on the combined results.
+
+```yaml
+jobs:
+  eval:
+    strategy:
+      matrix:
+        shard: [0, 1, 2, 3, 4]
+      max-parallel: 5
+    steps:
+      - run: |
+          python -m eval.ab_compare --skill-path ... --shard ${{ matrix.shard }} --total-shards 5
+  merge:
+    needs: eval
+    steps:
+      - run: python -m eval.merge_shards --output ab_results.json
+```
+
+Requires adding `--shard` / `--total-shards` flags to `ab_compare.py` and a
+`eval/merge_shards.py` script. No code change to the eval logic itself.
+
+Pros: zero infrastructure; uses GitHub's native parallelism; free for public repos.
+Cons: only helps CI, not local dev; each runner has cold-start overhead (~30s); needs
+merge step logic; more complex workflow YAML.
+
+---
+
+**Option E: Ray remote (scales to large task banks, future-proofing)**
+
+Make each `run_task` call a `@ray.remote` function. Ray schedules across all available
+CPUs automatically. No semaphore needed — Ray handles backpressure.
+
+```python
+import ray
+
+@ray.remote
+def run_task_remote(task_path, skill_path, condition, model):
+    return run_task(task_path, skill_path, condition, model)
+
+# In run_ab_compare:
+futures = [
+    run_task_remote.remote(t, skill_path, cond, model)
+    for t in tasks for cond in [None, skill_path] for _ in range(n_trials)
+]
+all_results = ray.get(futures)
+```
+
+Pros: auto-scales to all cores; works locally and in Ray cluster; handles 1000-task
+banks without code changes.
+Cons: Ray adds ~200ms cold-start per session; heavier dependency; more than needed
+for the current 50-task bank.
+
+Worth revisiting if the task bank grows to 200+ tasks.
+
+---
+
+#### Recommendation
+
+| Phase | Approach | Speedup | Effort |
+|-------|----------|---------|--------|
+| Now | Option B: parallelize trials within task | ~8x | 10 lines |
+| Phase 3 web | Option A + Semaphore: full gather | ~10x | 30 lines |
+| Phase 3 web eval runner | Option C: Celery + Redis | ~20x + resilience | 2-3 days |
+| CI at scale | Option D: GH Actions matrix | ~5x | 1 day |
+| Future (200+ tasks) | Option E: Ray | auto-scales | 2 days |
+
+Start with **Option B** — it preserves streaming UX, changes ~10 lines, and gives an
+8x speedup with zero infrastructure change. Add Celery (Option C) when the web eval
+runner needs to handle long-running jobs without HTTP timeout risk.
+
+---
+
 ### Phase 5: Multi-model Eval + Gate Calibration (Week 7+)
 
 **Goal:** Test skills across multiple models (Gemini 2.5 Flash, GPT-4.1-mini, Claude Haiku) to find model-skill compatibility gaps.
