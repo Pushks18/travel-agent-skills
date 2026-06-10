@@ -19,19 +19,22 @@ metadata:
    - **Passenger detail update**: name correction, contact email, or phone number
    - **Cancellation**: full trip or specific legs only
    - **Refund request**: follows a cancellation
-3. **Check fare rules.** Retrieve the fare rules for the booking to determine:
+3. **Check fare rules.** Retrieve the fare rules to determine:
    - Whether the requested change is allowed on this fare type
    - The applicable change or cancellation fee
    - Any fare difference payable for date or cabin changes
    - Refund eligibility, amount, and processing timeline for cancellations
+   Fare rules are per flight, not per booking: get the flight_id from
+   'get_itinerary' first, then pass that flight_id to 'get_fare_rules' —
+   never pass a booking reference as the flight_id.
    If fare rules cannot be retrieved, pause and inform the user before proceeding.
 4. **Present the cost and consequences.** Before making any change, show the user:
    - The change or cancellation fee
    - Any fare difference (additional charge or credit)
    - The refund amount and expected processing timeline if cancelling
    - Any downstream impact — for example, ancillary services already added that may be voided by the change
-5. **Get explicit confirmation.** Do not proceed with any modification until the user has confirmed they accept the cost summary.
-6. **Execute the change.** Submit the modification using the approved booking tool. Do not fabricate new booking references, change confirmation codes, or refund amounts.
+5. **Get explicit confirmation — when the request needs it.** When the user's instruction is explicit and fully specified (booking reference plus the exact change, e.g. "Change the date on BK11223344 to August 20"), that instruction IS the confirmation: proceed to execute 'modify_booking' in the same turn, presenting the cost summary alongside the result. Reserve a separate confirmation step for requests that are ambiguous, involve a fee or fare difference the user has not seen, or where the user asked for options rather than a change.
+6. **Execute the change.** Submit the modification using 'modify_booking' with the booking_id and the requested changes. Do not fabricate new booking references, change confirmation codes, or refund amounts.
 7. **Confirm the outcome.** Present the updated booking details or cancellation confirmation:
    - Updated or cancelled booking reference
    - New travel details (dates, cabin class) or confirmation of cancellation
@@ -68,7 +71,7 @@ A modification confirmation including:
 - If the fare is non-changeable or non-refundable, inform the user clearly and do not attempt the modification.
 - For name changes, distinguish between a minor correction (e.g., a typo) and a full name transfer — the allowed changes and fees differ.
 - If the user wants to cancel only one leg of a round-trip, confirm whether this is permitted on their fare type before proceeding.
-- Never proceed with a modification without explicit user confirmation of the full cost.
+- An explicit, fully specified change instruction (booking reference + exact change) counts as confirmation — execute it directly and present the cost with the result. Only hold for separate confirmation when the request is ambiguous or carries fees the user has not seen.
 - Do not fabricate new confirmation numbers, change fees, or refund amounts.
 - If the modification fails due to changed availability or a system error, explain the reason clearly and suggest alternatives.
 - For partial cancellations on multi-passenger bookings, confirm which passengers are affected before submitting.

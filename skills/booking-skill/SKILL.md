@@ -18,11 +18,11 @@ metadata:
 3. **Collect passenger details.** For each passenger, collect:
    - Full legal name (as it appears on ID/passport)
    - Date of birth
-   - Contact email and phone number
+   - Contact email and phone number (ask if absent, but do not block the booking on them — they can be added to the booking afterwards)
    - Passport or national ID number (for international flights)
    - Frequent flyer number (optional)
 
-4. **Validate passenger information.** Check that names contain no special characters that would be rejected, dates of birth are plausible, and contact details are complete. Flag any issues before attempting to book.
+4. **Validate passenger information.** Check that names contain no special characters that would be rejected and dates of birth are plausible. Flag any issues before attempting to book. Missing contact details are a follow-up item, not a blocker: proceed with the booking using the details provided and note what is still needed.
 
 5. **Check availability.** Confirm the selected flight or hotel is still available at the quoted price. If it is no longer available, inform the user immediately and offer to re-search.
 
@@ -44,8 +44,8 @@ metadata:
 | Flight or hotel selection | From a prior search or explicitly stated by the user |
 | Passenger full name | Legal name matching travel document |
 | Date of birth | Required for all passengers |
-| Contact email | For booking confirmation |
-| Contact phone | For disruption notifications |
+| Contact email | For booking confirmation — ask if absent, but proceed without it |
+| Contact phone | For disruption notifications — ask if absent, but proceed without it |
 
 ## Optional Inputs
 
