@@ -11,7 +11,9 @@ metadata:
 
 ## Workflow
 
-1. **Identify the booking.** Ask for the booking reference (PNR or confirmation number) if not already in context. Confirm the booking details — passenger name, route, and dates — so the user can verify the correct reservation is being modified.
+When the user's instruction is explicit and fully specified (booking reference plus the exact change, e.g. "Change the date on BK11223344 to August 20"), complete this ENTIRE workflow in a single turn — get_itinerary, fare rules, then 'modify_booking' — and present the booking details, costs, and result together at the end. Do not stop between steps to await user input; the explicit instruction is the confirmation.
+
+1. **Identify the booking.** Ask for the booking reference (PNR or confirmation number) if not already in context. Present the booking details — passenger name, route, and dates — alongside the result so the user can verify the correct reservation was modified; only pause for verification when the reference or requested change is ambiguous.
 2. **Identify the requested change.** Determine what the user wants to change:
    - **Date or time change**: new travel date, departure time, or return date
    - **Route change**: new origin, destination, or connecting airports
