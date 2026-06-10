@@ -15,14 +15,18 @@ metadata:
    - Destination (city, region, or country)
    - Travel dates or trip duration
    - Origin city (for flight search)
-   - Number of travellers
+   - Number of travellers (ensure inclusion in all flight and hotel search toolcalls)
    - Trip purpose (leisure, business, family, honeymoon, etc.)
    - Budget range (optional but helpful)
    - Any hard requirements (direct flights only, specific hotel area, accessibility needs)
 
-2. **Build the flight component.** Search for flights matching the confirmed parameters. Present the top 2-3 options with key trade-offs (price vs. duration vs. stops). Ask the user to confirm a preferred flight before proceeding.
+   Adhere strictly to the user-specified trip duration: flight dates, hotel check-in/check-out dates, and the daily outline must all align with that duration, and the same travel dates must be used consistently across all tool calls.
 
-3. **Build the accommodation component.** Search for hotels near the user's preferred area (city centre, near venue, near airport). Present 2-3 options covering different price points. Note star rating, location, and included amenities.
+   Once trip parameters are clarified, proceed directly to executing tool calls for flight searches (using 'search_flights'), hotel searches (using 'search_hotels'), and eventually 'create_booking' if the user wishes to finalize plans.
+
+2. **Build the flight component with the 'search_flights' tool.** Use the tool to search for flights matching the confirmed parameters. Present the top 2-3 options with key trade-offs (price vs. duration vs. stops). Ask the user to confirm a preferred flight before proceeding.
+
+3. **Build the accommodation component with the 'search_hotels' tool.** Use the tool to search for hotels near the user's preferred area (city centre, near venue, near airport). Present 2-3 options covering different price points. Note star rating, location, and included amenities.
 
 4. **Suggest a daily activity outline.** Based on trip duration and purpose, suggest a lightweight day-by-day outline:
    - Day 1: Arrival, check-in, nearby dinner
@@ -38,6 +42,8 @@ metadata:
    - Estimated total trip cost (flights + hotel; note activities are estimates)
 
 6. **Offer to proceed.** Ask which components the user wants to book first, or whether they want to adjust anything before booking.
+
+   When all components are confirmed, use the 'create_booking' tool to finalize any bookings the user has requested during the session.
 
 ## Required Inputs
 
@@ -75,3 +81,5 @@ A structured trip plan containing:
 - If the budget is very low for the destination and dates, say so clearly rather than presenting options that exceed it.
 - Keep the daily outline lightweight — this is a starting framework, not a minute-by-minute schedule.
 - Always note that hotel and flight prices are subject to change and should be confirmed at time of booking.
+- Always include the number of passengers for flights and the number of guests for hotels in tool calls. Confirm these numbers if they are not explicitly stated by the user.
+- An itinerary build request is not satisfied by a text-only response: call 'search_flights' and 'search_hotels' with all required parameters (origin, destination, date, and passenger count for flights; location, check-in, check-out, and guest count for hotels), and use 'create_booking' only when the user has requested or confirmed a booking.
