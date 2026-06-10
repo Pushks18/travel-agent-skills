@@ -26,12 +26,15 @@ jobs:
         with:
           fetch-depth: 2
 
+      # Same owner as this repo (works on a personal fork without extra config).
+      # EVAL_PLATFORM_TOKEN is only needed when the platform repo is private;
+      # for a public repo the default github.token suffices.
       - name: Checkout eval platform
         uses: actions/checkout@v4
         with:
-          repository: Tabhi-Commons/skill-testing-playground
+          repository: ${{ github.repository_owner }}/skill-testing-playground
           path: eval-platform
-          token: ${{ secrets.EVAL_PLATFORM_TOKEN }}
+          token: ${{ secrets.EVAL_PLATFORM_TOKEN || github.token }}
 
       - uses: actions/setup-python@v5
         with:
@@ -61,7 +64,11 @@ jobs:
         run: |
           cd eval-platform
           python eval/mock_mcp/server.py &
-          sleep 2
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:8000/health && break
+            sleep 1
+          done
+          curl -sf http://localhost:8000/health || { echo "mock MCP server failed to start"; exit 1; }
 
       - name: Run A/B eval
         if: steps.skill.outputs.skill != ''
