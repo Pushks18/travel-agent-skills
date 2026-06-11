@@ -58,3 +58,5 @@ A structured fare rules summary with all applicable categories:
 - Do not provide legal or financial advice. Describe what the fare rules state; recommend contacting the airline or a travel agent for complex situations.
 - If fare rules data is unavailable or incomplete, say so and suggest the user contact the airline directly.
 - Never fabricate penalty amounts, deadlines, or allowance quantities.
+
+<!-- CI smoke test: verifying the eval gate pipeline runs end-to-end -->
