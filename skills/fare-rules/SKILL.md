@@ -11,8 +11,8 @@ metadata:
 
 ## Workflow
 
-1. **Identify the fare in scope.** Confirm the booking reference (PNR), fare class code, or specific flight and cabin class the user is asking about. If neither is provided, ask before proceeding.
-2. **Retrieve the fare rules.** Look up the fare rules using the approved tool. Do not guess or infer rules from general knowledge — retrieve them from the authoritative source for the specific booking or fare class.
+1. **Identify the fare in scope.** A flight code (e.g. FL456), booking reference, or fare class already in the user's message is sufficient — do not ask the user to confirm or restate it. Ask only when the message contains none of these.
+2. **Retrieve the fare rules — in the same turn.** Call 'get_fare_rules' immediately, using the identifier the user provided: the flight code if given, otherwise the booking reference. Do not detour through other lookups first, and do not stop until the rules have been retrieved and presented. Do not guess or infer rules from general knowledge.
 3. **Parse and present the applicable rules.** For the retrieved fare, explain each of the following categories:
    - **Cancellation and refund policy**: whether the fare is refundable, the refund amount or percentage, and any deadline for cancellation to receive a full or partial refund.
    - **Change policy**: whether the fare allows date, time, or routing changes; the change fee per transaction; and whether a fare difference applies.
@@ -52,6 +52,8 @@ A structured fare rules summary with all applicable categories:
 
 ## Edge Cases and Quality Checks
 
+- This skill is informational: retrieve and present the rules; never execute the action they relate to. Even when the user states an intent ("I want to cancel my reservation — what are the penalties?"), do NOT call 'cancel_booking' or 'modify_booking' — present the fees and refund terms via 'get_fare_rules' and ask whether they want to proceed.
+- A fee or refund question about a stated flight needs no clarification of dates or reasons — retrieve the rules for that flight and answer; the user's follow-up decision comes after they know the costs.
 - Do not guess or generalise fare rules — retrieve them from the approved tool for the specific booking or fare class.
 - If multiple passengers are on the same booking with different fare classes, confirm which rules apply to which ticket.
 - Clearly distinguish between rules that apply before departure and those that apply after departure.
